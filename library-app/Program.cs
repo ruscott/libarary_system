@@ -1,31 +1,54 @@
 ﻿using LibrarySystem.Models;
+using LibrarySystem.Actions;
+
 using System;
 
-    class Program
+class Program
+{
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        Library library = new Library();
+
+        Book book1 = new Book { Title = "Book 1", Author = "Author 1", IsAvailable = true };
+        Book book2 = new Book { Title = "Book 2", Author = "Author 2", IsAvailable = false };
+        Book book3 = new Book { Title = "Book 3", Author = "Author 3", IsAvailable = true };
+
+        library.AddBook(book1);
+        library.AddBook(book2);
+        library.AddBook(book3);
+
+        Console.WriteLine("Welcome to the Library System!");
+
+        while (true)
         {
-            // Create an instance of the Library class
-            Library library = new Library();
+            Console.WriteLine("Please choose an option:");
+            Console.WriteLine("1. Customer");
+            Console.WriteLine("2. Admin");
+            Console.WriteLine("3. Exit");
 
-            // Create some books
-            Book book1 = new Book { Title = "Book 1", Author = "Author 1", IsAvailable = true };
-            Book book2 = new Book { Title = "Book 2", Author = "Author 2", IsAvailable = false };
-            Book book3 = new Book { Title = "Book 3", Author = "Author 3", IsAvailable = true };
+            string input = Console.ReadLine();
 
-            // Add the books to the library
-            library.AddBook(book1);
-            library.AddBook(book2);
-            library.AddBook(book3);
-
-            // Display the books in the library
-            Console.WriteLine("Books in the library:");
-            foreach (Book book in library.GetBooks())
+            if (input == "1")
             {
-                Console.WriteLine($"Title: {book.Title}, Author: {book.Author}, IsAvailable: {book.IsAvailable}");
+                CustomerActions.PerformActions(library);
+            }
+            else if (input == "2")
+            {
+                AdminActions.PerformActions(library);
+            }
+            else if (input == "3")
+            {
+                Console.WriteLine("Thank you for using the Library System. Goodbye!");
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid option. Please try again.");
             }
 
-            // Wait for user input before closing the console window
-            Console.ReadLine();
+            Console.WriteLine();
         }
+
+        Console.ReadLine();
     }
+}

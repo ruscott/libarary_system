@@ -20,7 +20,7 @@ public class Library
         return books;
     }
 
-    public Book? FindBook(string title)
+    public Book? GetBookByTitle(string title)
         {
             foreach (Book book in books)
             {
@@ -28,10 +28,16 @@ public class Library
                 {
                     return book;
                 }
-                return null;
             }
             return null;
 
         }
+    public static void PrintBooks(List<Book> books)
+    {
+        foreach (Book book in books)
+        {
+            Console.WriteLine($"Title: {book.Title}, Author: {book.Author}, IsAvailable: {book.IsAvailable}");
+        }
+    }
 }
 }
